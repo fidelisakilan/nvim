@@ -1,4 +1,3 @@
--- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -68,6 +67,7 @@ require('mason-lspconfig').setup()
 local servers = {
   clangd = {},
   pyright = {},
+  ruff = {},
   rust_analyzer = {},
   tsserver = {},
   -- gopls = {},
@@ -107,6 +107,16 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+require('lspconfig').pyright.setup({
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "off", -- Disable strict type checking
+      },
+    },
+  },
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`

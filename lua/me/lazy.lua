@@ -159,7 +159,7 @@ require('lazy').setup({
     config = function()
       require('catppuccin').setup({
         flavour = "auto", -- latte, frappe, macchiato, mocha
-        background = {    -- :h background
+        background = {     -- :h background
           light = "latte",
           dark = "mocha",
         },
@@ -168,31 +168,6 @@ require('lazy').setup({
       vim.cmd.colorscheme 'catppuccin'
     end,
   },
-  -- {
-  --   'rose-pine/neovim',
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme 'rose-pine'
-  --   end,
-  -- },
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {},
-  --   config = function()
-  --     vim.cmd.colorscheme 'tokyonight'
-  --   end,
-  -- },
-  -- {
-  --   "rebelot/kanagawa.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {},
-  --   config = function()
-  --     vim.cmd.colorscheme 'kanagawa-dragon'
-  --   end,
-  -- },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -269,34 +244,6 @@ require('lazy').setup({
   {
     "ThePrimeagen/vim-be-good",
   },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-      {
-        's1n7ax/nvim-window-picker',
-        version = '2.*',
-        config = function()
-          require 'window-picker'.setup({
-            filter_rules = {
-              include_current_win = false,
-              autoselect_one = true,
-              -- filter using buffer options
-              bo = {
-                -- if the file type is one of following, the window will be ignored
-                filetype = { 'neo-tree', "neo-tree-popup", "notify" },
-                -- if the buffer type is one of following, the window will be ignored
-                buftype = { 'terminal', "quickfix" },
-              },
-            },
-          })
-        end,
-      },
-    },
-  },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -314,6 +261,7 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -322,13 +270,17 @@ require('lazy').setup({
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   { 'sindrets/diffview.nvim' },
   {
-    'jose-elias-alvarez/null-ls.nvim',
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
     config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.black,
-        },
+      require("oil").setup({
+        view_options = {
+          -- Show files and directories that start with "."
+          show_hidden = true,
+        }
       })
     end,
   },
