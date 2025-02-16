@@ -159,7 +159,7 @@ require('lazy').setup({
     config = function()
       require('catppuccin').setup({
         flavour = "auto", -- latte, frappe, macchiato, mocha
-        background = {     -- :h background
+        background = {    -- :h background
           light = "latte",
           dark = "mocha",
         },
@@ -169,13 +169,36 @@ require('lazy').setup({
     end,
   },
   {
+    "sainnhe/gruvbox-material",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- vim.cmd.colorscheme 'gruvbox-material'
+    end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- vim.cmd.colorscheme 'tokyonight-night'
+    end,
+  },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+      -- vim.cmd.colorscheme 'rose-pine'
+    end
+  },
+  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'catppuccin',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
         disabled_filetypes = { 'neo-tree' },
